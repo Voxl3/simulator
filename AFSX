@@ -1,0 +1,157 @@
+local function getFRUIT()
+    local dist, thing = math.huge
+    for _,v in pairs(game:GetService("Workspace"):GetChildren()) do
+        if v.Name == "chop" or v.Name == "gura" or v.Name == "mera" or v.Name == "ice" or v.Name == "gura" then
+            local mag = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Mesh.Position).magnitude
+            if mag < dist then
+                dist = mag
+                thing = v
+            end
+        end
+    end
+    return thing
+end
+
+local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
+
+local X = Material.Load({
+    Title = "AFSX",
+    Style = 2,
+    SizeX = 300,
+    SizeY = 350,
+    Theme = "Light",
+    ColorOverrides = {
+        MainFrame = Color3.fromRGB(0,0,0),
+        Toggle = Color3.fromRGB(124,37,255),
+        ToggleAccent = Color3.fromRGB(255,255,255), 
+        Dropdown = Color3.fromRGB(124,37,255),
+		DropdownAccent = Color3.fromRGB(255,255,255),
+        Slider = Color3.fromRGB(124,37,255),
+		SliderAccent = Color3.fromRGB(255,255,255),
+        NavBarAccent = Color3.fromRGB(0,0,0),
+        Content = Color3.fromRGB(0,0,0),
+    }
+})
+
+local Y = X.New({
+    Title = "Main"
+})
+
+Y.Button({
+    Text = "Load Map",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1192.6337890625, 14.408954620361328, -126.598388671875)
+        task.wait(.5)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1030.98681640625, 174.62156677246094, -1715.4210205078125)
+        task.wait(.5)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(639.5204467773438, 17.245742797851562, -1971.4776611328125)
+        task.wait(.5)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1140.9661865234375, 14.682706832885742, -354.6196594238281)
+        task.wait(.5)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1038.8843994140625, 14.687472343444824, 1000.0218505859375)
+        
+    end,
+})
+
+Y.Toggle({
+    Text = "Auto Strength",
+    Callback = function(Value)
+        a = Value
+        while a do task.wait(.1)
+            local args = {
+                [1] = "TrainStat",
+                [2] = "Strength"
+            }
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Stats/RemoteFunction"):InvokeServer(unpack(args))
+            
+        end
+    end,
+    Enabled = false
+})
+
+Y.Toggle({
+    Text = "Auto Durability",
+    Callback = function(Value)
+        b = Value
+        while b do task.wait(.1)
+            local args = {
+                [1] = "TrainStat",
+                [2] = "Durability"
+            }
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Stats/RemoteFunction"):InvokeServer(unpack(args))
+            
+        end
+    end,
+    Enabled = false
+})
+
+Y.Toggle({
+    Text = "Auto Chakra",
+    Callback = function(Value)
+        zzzz = Value
+        while zzzz do task.wait(.1)
+            local args = {
+                [1] = "TrainStat",
+                [2] = "Chakra"
+            }
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Stats/RemoteFunction"):InvokeServer(unpack(args))
+            
+            
+        end
+    end,
+    Enabled = false
+})
+
+Y.Toggle({
+    Text = "Auto Sword",
+    Callback = function(Value)
+        zzz = Value
+        while zzz do task.wait(.1)
+            local args = {
+                [1] = "TrainStat",
+                [2] = "Sword"
+            }
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Stats/RemoteFunction"):InvokeServer(unpack(args))
+            
+            
+        end
+    end,
+    Enabled = false
+})
+
+Y.Toggle({
+    Text = "Auto Speed",
+    Callback = function(Value)
+        zz = Value
+        while zz do task.wait(.1)
+            local args = {
+                [1] = "TrainStat",
+                [2] = "Speed"
+            }
+            
+            game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("Stats/RemoteFunction"):InvokeServer(unpack(args))
+            
+            
+        end
+    end,
+    Enabled = false
+})
+local vim = game:service'VirtualInputManager'
+Y.Toggle({
+    Text = "Tp to Fruit",
+    Callback = function(Value)
+        t = Value
+        while t do task.wait(.1)
+            pcall(function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = getFRUIT().Mesh.CFrame
+            vim:SendKeyEvent(true, "E", false, game)
+            print("working")
+        end)
+        end
+    end,
+    Enabled = false
+})
